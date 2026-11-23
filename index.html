@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konsolen-Helfer – Wie lange dauert mein Download, passt das Spiel, brauche ich eine SSD?</title>
+<meta name="description" content="Für PS5 und Xbox Series: Wie lange dauert der Download bei meiner Leitung, passt GTA 6 noch auf meine Konsole, was lösche ich, und lohnt sich eine SSD oder reicht eine USB-Festplatte? Kostenlos, ohne Anmeldung.">
+<style>
+:root{--bg:#f3f4f8;--card:#fff;--ink:#181a24;--muted:#5d6172;--line:#dcdfe8;--soft:#e9ebf2;
+--accent:#4b3fb5;--accent-ink:#fff;--accent-soft:#e6e3f8;--ok:#2d6e3a;--ok-soft:#e3f0e4;--warn:#9a5a00;--warn-soft:#fbefd9;--bad:#b0261f;--bad-soft:#fbe4e1}
+@media (prefers-color-scheme:dark){:root{--bg:#10111a;--card:#1a1c28;--ink:#e9eaf2;--muted:#a2a6b8;--line:#2f3242;--soft:#232636;
+--accent:#b0a8f5;--accent-ink:#17123d;--accent-soft:#25213f;--ok:#86c98f;--ok-soft:#1d321f;--warn:#e8b15d;--warn-soft:#382c17;--bad:#ef8a80;--bad-soft:#3b1e1b}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.brand{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:6px;cursor:pointer;background:none;border:0;color:var(--ink);font-family:inherit;padding:0}
+.brand span{font-size:1.25rem}
+.back{background:none;border:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;padding:6px 0}
+h1{font-size:1.6rem;line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 14px}
+.sub{color:var(--muted);margin:0 0 20px}
+.step{font-size:.85rem;color:var(--muted);margin:14px 0 6px}
+.qlist{display:flex;flex-direction:column;gap:10px}
+.q{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;font:inherit;color:inherit;cursor:pointer;text-decoration:none}
+.q:active,.pill:active{transform:scale(.98)}
+.q .ic{flex:0 0 46px;height:46px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.q b{display:block;font-size:1.05rem}
+.q span{display:block;color:var(--muted);font-size:.88rem}
+.news{background:var(--warn-soft);border-radius:14px;padding:12px 14px;font-size:.9rem;margin:0 0 16px}
+.news b{color:var(--warn)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 15px;font:inherit;font-size:.93rem;cursor:pointer;min-height:44px}
+.pill.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.field{display:block}
+.field span{display:block;font-size:.82rem;color:var(--muted);margin-bottom:4px;min-height:2.3em}
+input[type=number],input[type=time],input[type=text]{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;height:48px;width:100%}
+input:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.answer{margin-top:20px;border-radius:18px;padding:18px;background:var(--accent-soft)}
+.answer.ok{background:var(--ok-soft)}.answer.warn{background:var(--warn-soft)}.answer.bad{background:var(--bad-soft)}
+.answer .lbl{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.answer .say{font-size:1.28rem;font-weight:700;line-height:1.3;margin:6px 0 8px}
+.answer.ok .say{color:var(--ok)}.answer.warn .say{color:var(--warn)}.answer.bad .say{color:var(--bad)}
+.answer .more{font-size:.95rem}
+.list{margin:12px 0 0;padding:0;list-style:none;border-top:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.list li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent);font-size:.95rem}
+.list li b{white-space:nowrap;text-align:right}
+.list li.best b{color:var(--ok)}
+.bars{margin:14px 0 4px;display:flex;flex-direction:column;gap:8px}
+.bar{font-size:.88rem}
+.bar .row{display:flex;justify-content:space-between;gap:8px}
+.bar .track{height:14px;border-radius:7px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden;margin-top:3px}
+.bar .fill{height:100%;border-radius:7px;background:var(--accent)}
+.bar .fill.best{background:var(--ok)}
+.tips{margin:10px 0 0;padding-left:20px;font-size:.92rem}
+.tips li{margin:4px 0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:11px 16px;font:inherit;font-weight:600;cursor:pointer;min-height:46px;text-decoration:none;display:inline-flex;align-items:center}
+.btn.ghost{background:transparent;color:var(--accent)}
+.msg{font-size:.88rem;color:var(--ok);align-self:center}
+.formula{font-size:.83rem;color:var(--muted);margin-top:12px;line-height:1.45}
+.hint{font-size:.85rem;color:var(--muted);margin:6px 0 0}
+.hide{display:none!important}
+footer{margin-top:28px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.5}
+footer a,.answer a{color:var(--accent)}
+.games{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.game{display:grid;grid-template-columns:1fr 84px 44px 44px;gap:6px;align-items:center}
+.game input{height:44px}
+.mini{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:12px;height:44px;font:inherit;cursor:pointer}
+.mini.on{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
+.add{margin-top:8px;background:none;border:1px dashed var(--line);color:var(--accent);border-radius:12px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer;width:100%}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-top:12px}
+.box h3{font-size:1.02rem;margin:0 0 4px}
+.box .hint{margin-top:0}
+</style>
+<script data-goatcounter="https://schrauberbits.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="brand" id="home" aria-label="Zur Startseite"><span>💾</span>Konsolen-Helfer</button>
+    <button class="back hide" id="back">← Andere Frage</button>
+  </div>
+  <main id="app"></main>
+  <footer>Richtwerte ohne Gewähr. Spielgrößen und nutzbarer Speicher: Rockstar Games, PlayStation-Support, ComputerBase, GIGA, drohnen.de (Stand 23.11.2026). Wie schnell deine Konsole wirklich lädt, zeigt der Verbindungstest in den Netzwerk-Einstellungen. Preise sind Beispiele mit Datum, keine Kaufempfehlung.<br>Kostenlos, ohne Anmeldung, ohne Werbung – ein Hobbyprojekt, mit KI-Hilfe erstellt. Deine Eingaben bleiben auf deinem Gerät. Gezählt wird nur anonym und ohne Cookies (mit GoatCounter): wie oft das Programm aufgerufen und benutzt wird und über welchen Link – ohne persönliche Daten und ohne deine Eingaben.<br>Mehr Helfer: <a href="https://schrauberbits.github.io/pc-helfer/">PC-Helfer</a> · <a href="https://schrauberbits.github.io/watt-helfer/">Watt-Helfer</a> · <a href="https://schrauberbits.github.io/fuehrerschein-helfer/">Führerschein-Helfer</a> · <a href="https://schrauberbits.github.io/tarif-helfer/">Tarif-Helfer</a></footer>
+</div>
+
+<script>
+// ================= Grundlagen =================
+const app=document.getElementById('app');
+const num=v=>{const n=parseFloat(String(v).replace(',','.'));return isFinite(n)?n:0};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const zahl=(x,d)=>Number(x).toLocaleString('de-DE',{maximumFractionDigits:d==null?0:d});
+const eur=x=>Math.round(x).toLocaleString('de-DE')+' €';
+const eur2=x=>(Math.round(x*100)/100).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const ohneTags=s=>String(s).replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&amp;/g,'&');
+function dauer(h){ if(!isFinite(h)) return '–'; const min=Math.round(h*60); if(min<1) return 'unter 1 Min.'; if(min<60) return min+' Min.'; const t=Math.floor(min/1440), s=Math.floor((min%1440)/60), m=min%60;
+  if(t>0) return t+' Tag'+(t>1?'e':'')+(s?' '+s+' Std.':''); return s+' Std.'+(m?' '+m+' Min.':''); }
+const TAGE=['So','Mo','Di','Mi','Do','Fr','Sa'];
+function uhr(d){ const heute=new Date(); const morgen=new Date(heute.getFullYear(),heute.getMonth(),heute.getDate()+1);
+  const t=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')+' Uhr';
+  if(d.toDateString()===heute.toDateString()) return 'heute '+t; if(d.toDateString()===morgen.toDateString()) return 'morgen '+t;
+  return TAGE[d.getDay()]+' '+d.getDate()+'.'+(d.getMonth()+1)+'. '+t; }
+
+// ---------- Zählen: ein Ereignis, sobald der Besucher selbst etwas ändert ----------
+const REF=((new URLSearchParams(location.search).get('ref')||'ohne').replace(/[^a-z0-9_-]/gi,'').slice(0,40))||'ohne';
+let genutzt=false;
+function senden(path,title,versuch){
+  try{ if(window.goatcounter&&window.goatcounter.count){ window.goatcounter.count({path,title,event:true}); return; } }catch(e){ return; }
+  if(versuch<40) setTimeout(()=>senden(path,title,versuch+1),250);
+}
+function nutzung(e){
+  if(genutzt||!e.isTrusted) return;
+  const t=e.target; if(!(t instanceof Element)) return;
+  if(!(t.matches('input')||t.closest('.pill,.mini,.add,[data-cnt]'))) return;
+  if(e.type==='click'&&t.matches('input')) return; // bloßes Antippen eines Feldes zählt nicht
+  genutzt=true; senden('konsole-nutzung--'+REF,'Konsolen-Helfer: Wert geändert ('+REF+')',0);
+}
+['input','change','click'].forEach(ev=>app.addEventListener(ev,nutzung,true));
+
+// ---------- Werte über den Hash: #bereich?wert=… ----------
+function hashTeile(){ const h=location.hash.slice(1), i=h.indexOf('?'); return {seite:i<0?h:h.slice(0,i), p:new URLSearchParams(i<0?'':h.slice(i+1))}; }
+const STANDARD=new Map();
+function vorbelegen(S,p){ if(!STANDARD.has(S)) STANDARD.set(S,Object.assign({},S));
+  if([...p.keys()].some(k=>k in S)) Object.assign(S,STANDARD.get(S));
+  for(const k of Object.keys(S)){ if(!p.has(k)) continue; const v=p.get(k); S[k]=typeof S[k]==='number'?num(v):String(v).slice(0,300); } }
+function query(S){ const q=new URLSearchParams(); for(const [k,v] of Object.entries(S)) q.set(k,v); return q.toString(); }
+function hashSetzen(seite,S){ history.replaceState(null,'',location.pathname+location.search+'#'+seite+'?'+query(S)); }
+function teilLink(seite,S){ return location.origin+location.pathname+'?ref=geteilt#'+seite+'?'+query(S); }
+
+// ---------- Bausteine ----------
+const h=html=>{app.innerHTML=html;window.scrollTo(0,0)};
+const pills=(id,list,sel)=>`<div class="pills" id="${id}">${list.map(p=>`<button class="pill${String(p[0])===String(sel)?' on':''}" data-v="${p[0]}">${p[1]}</button>`).join('')}</div>`;
+function pillGroup(id,cb){document.getElementById(id).addEventListener('click',e=>{const b=e.target.closest('.pill');if(!b)return;b.parentElement.querySelectorAll('.pill').forEach(x=>x.classList.toggle('on',x===b));cb(b.dataset.v);});}
+const feld=(id,label,typ,val,extra)=>`<label class="field"><span>${label}</span><input type="${typ}" id="${id}" value="${esc(val)}" ${extra||''}></label>`;
+const zahlFeld=(id,label,val,max,step)=>feld(id,label,'number',val,`min="0" max="${max||99999}" step="${step||1}" inputmode="decimal"`);
+const liste=rows=>`<ul class="list">${rows.map(r=>`<li${r[2]?' class="best"':''}><span>${r[0]}</span><b>${r[1]}</b></li>`).join('')}</ul>`;
+function balken(rows,fmt){ const max=Math.max(...rows.map(r=>r[1]),0.0001); const min=Math.min(...rows.map(r=>r[1]));
+  return `<div class="bars">${rows.map(r=>`<div class="bar"><div class="row"><span>${r[0]}</span><b>${fmt(r[1])}</b></div><div class="track"><div class="fill${r[1]===min?' best':''}" style="width:${Math.max(3,r[1]/max*100)}%"></div></div></div>`).join('')}</div>`; }
+function antwortBox(cls,label,say,more,inhalt,tips,copyText,formel){
+  return `<div class="answer ${cls}"><div class="lbl">${label}</div><div class="say">${say}</div>${more?`<div class="more">${more}</div>`:''}
+  ${inhalt||''}
+  ${tips&&tips.length?`<ul class="tips">${tips.map(t=>`<li>${t}</li>`).join('')}</ul>`:''}
+  ${formel?`<div class="formula">${formel}</div>`:''}
+  <div class="actions"><button class="btn" data-share>Ergebnis teilen</button><button class="btn ghost" data-copy>Als Text kopieren</button><span class="msg" data-msg></span></div>
+  <textarea class="hide" data-text>${esc(copyText)}</textarea></div>`;
+}
+let aktuell={seite:'',S:null,titel:''};
+async function kopieren(text,el,ok){ try{await navigator.clipboard.writeText(text);el.textContent=ok||'Kopiert ✓';}catch(e){el.textContent='Bitte Text markieren und kopieren.';} setTimeout(()=>{el.textContent=''},3000); }
+app.addEventListener('click',async e=>{
+  const c=e.target.closest('[data-copy]'), s=e.target.closest('[data-share]'); if(!c&&!s) return;
+  const box=e.target.closest('.answer'), msg=box.querySelector('[data-msg]'), text=box.querySelector('[data-text]').value;
+  if(c) return kopieren(text,msg);
+  const url=teilLink(aktuell.seite,aktuell.S);
+  if(navigator.share){ try{ await navigator.share({title:aktuell.titel,text:text+'\n\nZum Nachrechnen mit meinen Werten:',url}); return; }catch(err){ if(err&&err.name==='AbortError') return; } }
+  kopieren(text+'\n\nZum Nachrechnen mit meinen Werten: '+url,msg,'Text und Link kopiert ✓');
+});
+app.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b) location.hash=b.dataset.go;});
+function verbinden(ids,S,cb){ const upd=()=>{for(const [id,k] of Object.entries(ids)){const el=document.getElementById(id); if(!el) continue; S[k]=typeof S[k]==='number'?num(el.value):el.value;} cb();};
+  Object.keys(ids).forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('input',upd);}); }
+
+// ================= Daten (Stand 23.11.2026) =================
+// Nutzbarer Speicher ab Werk: ComputerBase (PS5 667 GB, Series X 802 GB, Series S 364 GB), GIGA (PS5 Slim 840 GB, PS5 Pro 1,89 TB)
+const KONSOLEN={
+  ps5:{name:'PS5 (825 GB)',kurz:'PS5',frei:667,sony:true},
+  slim:{name:'PS5 Slim (1 TB)',kurz:'PS5 Slim',frei:840,sony:true},
+  pro:{name:'PS5 Pro (2 TB)',kurz:'PS5 Pro',frei:1890,sony:true},
+  xss:{name:'Xbox Series S (512 GB)',kurz:'Xbox Series S',frei:364,sony:false},
+  xsx:{name:'Xbox Series X (1 TB)',kurz:'Xbox Series X',frei:802,sony:false}
+};
+const KON_PILLS=[['ps5','PS5 825 GB'],['slim','PS5 Slim 1 TB'],['pro','PS5 Pro'],['xss','Series S'],['xsx','Series X']];
+// Erweiterung: PS5 M.2-SSD bzw. Xbox-Erweiterungskarte (1 TB Karte = 920 GB nutzbar laut GamePro; M.2 nach Formatierung ca. 93 %)
+const erwNutzbar=(k,gb)=>gb<=0?0:(KONSOLEN[k].sony?Math.round(gb*0.93):Math.round(gb*0.92));
+// Verbindung: Anteil der Vertragsgeschwindigkeit, der an der Konsole ankommt (Erfahrungswerte, ersetzbar durch den Verbindungstest)
+const WEGE={
+  lan:{t:'LAN-Kabel',f:0.9},
+  w5:{t:'WLAN 5 GHz, Router im selben Raum',f:0.7},
+  wand:{t:'WLAN durch Wände oder Stockwerke',f:0.45},
+  w24:{t:'WLAN 2,4 GHz',f:0.3,max:70},
+  hot:{t:'Handy-Hotspot',f:0.8},
+  mess:{t:'gemessen mit dem Verbindungstest der Konsole',f:1}
+};
+const WEG_PILLS=[['lan','LAN-Kabel'],['w5','WLAN nah'],['wand','WLAN durch Wände'],['w24','WLAN 2,4 GHz'],['hot','Hotspot'],['mess','Wert gemessen']];
+const effMbit=(mbit,weg)=>{const w=WEGE[weg]||WEGE.w5; let e=mbit*w.f; if(w.max) e=Math.min(e,w.max); return Math.max(0.1,e);};
+const stunden=(gb,mbit)=>gb*8000/mbit/3600;          // 1 GB = 8.000 Megabit
+const USB_HDD=110, USB_SSD=400;                       // MB/s beim Zurückkopieren (Festplatte ca. 100–160, USB-SSD ca. 400–500)
+const kopierStd=(gb,mbs)=>gb*1000/mbs/3600;
+const SPIELE=[['212','GTA 6 (212 GB)'],['95','GTA 5 (ca. 95 GB)'],['50','50 GB'],['100','100 GB'],['150','150 GB']];
+
+// ================= Startseite =================
+function start(){
+  h(`<h1>Wann kann ich endlich spielen?</h1>
+  <p class="sub">Für PS5 und Xbox Series: Download-Zeit mit deiner Leitung, ob das Spiel noch passt, was du löschen kannst – und ob sich eine SSD lohnt.</p>
+  <div class="news"><b>GTA 6:</b> Rockstar und Sony nennen bis zu 212 GB, auf der PS5-Hülle stehen 230 GB Minimum. Es gibt keine Disc – auch die Box enthält nur einen Download-Code.</div>
+  <div class="qlist">
+    <button class="q" data-go="download"><div class="ic">⏱️</div><div><b>Wie lange dauert mein Download?</b><span>Mit deiner Leitung, LAN oder WLAN – und wann er fertig ist</span></div></button>
+    <button class="q" data-go="platz"><div class="ic">📦</div><div><b>Passt das Spiel – und was lösche ich?</b><span>Freier Platz, kleinste Lösch-Lösung, Zeit zum Neuladen</span></div></button>
+    <button class="q" data-go="ssd"><div class="ic">💸</div><div><b>SSD kaufen, USB-Platte oder einfach löschen?</b><span>Wartezeit, Kosten und wie lange du dafür sparst</span></div></button>
+  </div>
+  <p class="hint" style="margin-top:16px">Neue Konsole zu Weihnachten? Rechne vorher aus, wie lange alle Downloads dauern – an Feiertagen sind die Server oft langsamer.</p>`);
+  aktuell={seite:'',S:null,titel:''};
+}
+
+// ================= Download =================
+const DL={gb:212,mbit:100,weg:'w5',start:''};
+function download(p){
+  vorbelegen(DL,p); const S=DL;
+  h(`<h2>⏱️ Wie lange dauert mein Download?</h2>
+  <div class="step">Wie groß ist der Download?</div>
+  ${pills('gbp',SPIELE,String(S.gb))}
+  <div class="fields">${zahlFeld('gb','Größe in GB (steht im Store)',S.gb,2000,0.1)}${zahlFeld('mbit','Leitung in Mbit/s (Vertrag oder gemessen)',S.mbit,10000,1)}</div>
+  <div class="step">Wie ist die Konsole verbunden?</div>
+  ${pills('weg',WEG_PILLS,S.weg)}
+  <div class="fields">${feld('start','Start (leer = jetzt)','time',S.start,'')}<div></div></div>
+  <div id="out"></div>`);
+  const rechne=()=>{
+    const gb=clamp(S.gb,0.1,5000), mbit=clamp(S.mbit,0.5,100000), e=effMbit(mbit,S.weg);
+    const theo=stunden(gb,e), von=theo*1.05, bis=theo*1.25;
+    let st=new Date(); if(/^\d{1,2}:\d{2}$/.test(S.start)){const [hh,mm]=S.start.split(':').map(Number); const d=new Date(); d.setHours(hh,mm,0,0); if(d<st&&st-d>3600000) d.setDate(d.getDate()+1); st=d;}
+    const fertig=new Date(st.getTime()+bis*3600000);
+    const vergleich=['lan','w5','wand','w24'].map(w=>[WEGE[w].t,stunden(gb,effMbit(mbit,w))*1.15]);
+    const lanSpar=stunden(gb,e)*1.15-stunden(gb,effMbit(mbit,'lan'))*1.15;
+    const cls=bis<=3?'ok':bis<=12?'warn':'bad';
+    const tips=[];
+    if(S.weg!=='lan'&&S.weg!=='mess'&&lanSpar>0.25) tips.push(`Mit LAN-Kabel wärst du etwa <b>${dauer(lanSpar)}</b> schneller fertig.`);
+    if(S.weg==='hot') tips.push(`Achtung Datenvolumen: Der Download verbraucht <b>${zahl(gb)} GB</b> von deinem Handytarif.`);
+    if(bis>4) tips.push('Lass die Konsole im Ruhemodus weiterladen: PS5 unter Einstellungen › System › Energiesparen „Mit dem Internet verbunden bleiben“, Xbox im Energiemodus „Standby“.');
+    tips.push('Wie schnell es bei dir wirklich ankommt, zeigt der Verbindungstest (PS5: Einstellungen › Netzwerk › Verbindungsstatus › Internetverbindung testen). Den Wert oben eintragen und „Wert gemessen“ wählen.');
+    tips.push('Zu Spitzenzeiten (Release-Tag, Weihnachten, abends) liefern die Server von PlayStation und Xbox oft weniger, als deine Leitung schafft.');
+    const text=`Mein Download (${zahl(gb,1)} GB) mit ${zahl(mbit)} Mbit/s über ${WEGE[S.weg].t}: realistisch ${dauer(von)} bis ${dauer(bis)}, fertig etwa ${uhr(fertig)}.`+(lanSpar>0.25&&S.weg!=='lan'&&S.weg!=='mess'?` Mit LAN-Kabel ca. ${dauer(lanSpar)} schneller.`:'');
+    document.getElementById('out').innerHTML=antwortBox(cls,'Dein Download',`${dauer(von)} bis ${dauer(bis)}`,`Fertig etwa <b>${uhr(fertig)}</b> – bei ${zahl(e)} Mbit/s, die an der Konsole ankommen.`,
+      `<div class="step">Gleicher Download, andere Verbindung (mittlere Schätzung):</div>`+balken(vergleich,dauer),tips,text,
+      `Rechnung: ${zahl(gb,1)} GB × 8.000 = ${zahl(gb*8000)} Megabit; ÷ ${zahl(e,1)} Mbit/s = ${dauer(theo)} reine Ladezeit, dazu 5–25 % für Schwankungen und Entpacken. An der Konsole kommen erfahrungsgemäß an: LAN ca. 90 %, WLAN nah ca. 70 %, durch Wände ca. 45 %, 2,4 GHz ca. 30 % (höchstens 70 Mbit/s) – mit gemessenem Wert 100 %.`);
+    hashSetzen('download',S); aktuell={seite:'download',S,titel:'Konsolen-Helfer: Download-Zeit'};
+  };
+  verbinden({gb:'gb',mbit:'mbit',start:'start'},S,()=>{document.querySelectorAll('#gbp .pill').forEach(x=>x.classList.toggle('on',x.dataset.v===String(S.gb)));rechne();});
+  pillGroup('gbp',v=>{S.gb=num(v);document.getElementById('gb').value=S.gb;rechne();});
+  pillGroup('weg',v=>{S.weg=v;rechne();});
+  rechne();
+}
+
+// ================= Platz =================
+// g = "Name:GB:behalten;Name:GB:behalten" (behalten 1 = spiele ich gerade, nicht löschen)
+const PL={k:'ps5',erw:0,frei:'',neu:230,g:'Call of Duty:150:0;EA FC:60:1;Fortnite:40:1;GTA 5:95:0;Spider-Man 2:100:0',mbit:100,weg:'w5',usb:0};
+const spieleLesen=s=>String(s||'').split(';').map(x=>x.split(':')).filter(a=>a[0]!==undefined&&a.length>=2).slice(0,12).map(a=>({n:String(a[0]).replace(/[;:]/g,' ').slice(0,30),gb:Math.max(0,num(a[1])),b:a[2]==='1'?1:0}));
+const spieleText=L=>L.map(x=>`${String(x.n).replace(/[;:]/g,' ')}:${+x.gb.toFixed(1)}:${x.b}`).join(';');
+function platz(p){
+  vorbelegen(PL,p); const S=PL; let L=spieleLesen(S.g);
+  const erwPills=KONSOLEN[S.k].sony?[['0','keine'],['1000','1 TB'],['2000','2 TB'],['4000','4 TB']]:[['0','keine'],['512','512 GB'],['1000','1 TB'],['2000','2 TB']];
+  h(`<h2>📦 Passt das Spiel – und was lösche ich?</h2>
+  <div class="step">Deine Konsole</div>
+  ${pills('kon',KON_PILLS,S.k)}
+  <div class="step">${KONSOLEN[S.k].sony?'Eingebaute M.2-SSD':'Erweiterungskarte'}</div>
+  <div id="erwbox">${pills('erw',erwPills,String(S.erw))}</div>
+  <div class="step">Neues Spiel</div>
+  ${pills('neup',[['230','GTA 6 (230 GB laut Hülle)'],['100','100 GB'],['150','150 GB']],String(S.neu))}
+  <div class="fields">${zahlFeld('neu','Benötigter Platz in GB',S.neu,4000,0.1)}${feld('frei','Freier Platz laut Einstellungen in GB (leer = ausrechnen)','number',S.frei,'min="0" max="9000" step="0.1" inputmode="decimal"')}</div>
+  <div class="box"><h3>Installierte Spiele</h3><p class="hint">Größen stehen bei PS5 unter Einstellungen › Speicher › Konsolenspeicher › Spiele und Apps, bei Xbox unter Meine Spiele & Apps › Verwalten. ★ = spiele ich gerade, nicht löschen.</p>
+  <div class="games" id="games"></div><button class="add" id="addg">+ Spiel hinzufügen</button></div>
+  <div class="fields">${zahlFeld('mbit','Leitung in Mbit/s (für die Zeit zum Neuladen)',S.mbit,10000,1)}<div></div></div>
+  <div class="step">Hast du eine USB-Festplatte zum Auslagern?</div>
+  ${pills('usb',[['0','Nein'],['1','Ja']],String(S.usb))}
+  <div id="out"></div>`);
+  const zeichneSpiele=()=>{ document.getElementById('games').innerHTML=L.map((x,i)=>`<div class="game"><input type="text" data-i="${i}" data-f="n" value="${esc(x.n)}" aria-label="Spiel ${i+1}" maxlength="30"><input type="number" data-i="${i}" data-f="gb" value="${x.gb}" min="0" max="2000" step="0.1" inputmode="decimal" aria-label="GB"><button class="mini${x.b?' on':''}" data-i="${i}" data-f="b" aria-label="behalten">★</button><button class="mini" data-i="${i}" data-f="x" aria-label="entfernen">✕</button></div>`).join(''); };
+  zeichneSpiele();
+  const g=document.getElementById('games');
+  g.addEventListener('input',e=>{const t=e.target,i=+t.dataset.i; if(!L[i])return; if(t.dataset.f==='n') L[i].n=t.value.replace(/[;:]/g,' ').slice(0,30); else L[i].gb=Math.max(0,num(t.value)); S.g=spieleText(L); rechne();});
+  g.addEventListener('click',e=>{const t=e.target.closest('.mini'); if(!t)return; const i=+t.dataset.i; if(t.dataset.f==='b'){L[i].b=L[i].b?0:1;} else {L.splice(i,1);} S.g=spieleText(L); zeichneSpiele(); rechne();});
+  document.getElementById('addg').addEventListener('click',()=>{ if(L.length>=12) return; L.push({n:'Spiel '+(L.length+1),gb:50,b:0}); S.g=spieleText(L); zeichneSpiele(); rechne(); });
+  const rechne=()=>{
+    const K=KONSOLEN[S.k], erw=erwNutzbar(S.k,S.erw), gesamt=K.frei+erw, summe=L.reduce((a,x)=>a+x.gb,0);
+    const freiGegeben=String(S.frei).trim()!=='';
+    const frei=freiGegeben?Math.max(0,num(S.frei)):Math.max(0,gesamt-summe);
+    const neu=clamp(S.neu,0,9000), fehlt=neu-frei;
+    const e=effMbit(S.mbit,S.weg||'w5');
+    const neuladen=gb=>stunden(gb,e)*1.15;
+    const tips=[]; let cls,say,more,inhalt='',text;
+    const basis=liste([[`Nutzbar ab Werk (${K.kurz})`,zahl(K.frei)+' GB'],...(erw?[[KONSOLEN[S.k].sony?'Eingebaute M.2-SSD (nutzbar ca.)':'Erweiterungskarte (nutzbar ca.)',zahl(erw)+' GB']]:[]),[freiGegeben?'Frei laut deiner Angabe':'Frei (gerechnet: Speicher minus deine Spiele)',zahl(frei)+' GB'],['Brauchst du für das neue Spiel',zahl(neu)+' GB']]);
+    if(fehlt<=0){
+      cls='ok'; say=`Passt – danach sind noch ${zahl(-fehlt)} GB frei.`;
+      more=-fehlt<75?'Knapp: Halte 50–100 GB frei, sonst scheitert das nächste Update.':'Du musst nichts löschen.';
+      text=`${K.kurz}: Das Spiel (${zahl(neu)} GB) passt, danach sind noch ${zahl(-fehlt)} GB frei.`;
+      inhalt=basis;
+    } else {
+      const kand=L.filter(x=>!x.b&&x.gb>0).sort((a,b)=>b.gb-a.gb);
+      // kleinste Lösung: möglichst wenige Spiele, dabei möglichst wenig GB löschen (alle Kombinationen, höchstens 12 Spiele)
+      let wahl=null, best=null;
+      for(let m=1;m<(1<<kand.length);m++){ let n=0,s=0; const sel=[]; for(let i=0;i<kand.length;i++) if(m&(1<<i)){n++;s+=kand[i].gb;sel.push(kand[i]);}
+        if(s>=fehlt&&(!best||n<best.n||(n===best.n&&s<best.s))) best={n,s,sel}; }
+      if(best) wahl=best.sel;
+      if(wahl){
+        const frei2=wahl.reduce((a,x)=>a+x.gb,0);
+        cls='warn'; say=`Es fehlen ${zahl(fehlt)} GB – lösch ${wahl.length===1?'ein Spiel':wahl.length+' Spiele'} und es passt.`;
+        more=`Kleinste Lösung: <b>${wahl.map(x=>esc(x.n)).join(', ')}</b> (zusammen ${zahl(frei2)} GB).`;
+        inhalt=basis+`<div class="step">Was das Löschen später kostet:</div>`+liste(wahl.map(x=>[esc(x.n)+' ('+zahl(x.gb)+' GB)', S.usb?('zurückkopieren ca. '+dauer(kopierStd(x.gb,USB_HDD))):('neu laden ca. '+dauer(neuladen(x.gb)))]));
+        if(!S.usb) tips.push(`Mit einer USB-Festplatte als „Parkplatz“ müsstest du nichts neu laden: Zurückkopieren dauert bei ${zahl(wahl.reduce((a,x)=>a+x.gb,0))} GB etwa ${dauer(kopierStd(frei2,USB_HDD))} statt ${dauer(neuladen(frei2))} Download.`);
+        text=`${K.kurz}: Für das neue Spiel (${zahl(neu)} GB) fehlen ${zahl(fehlt)} GB. Kleinste Lösung: ${wahl.map(x=>x.n+' ('+zahl(x.gb)+' GB)').join(', ')} löschen`+(S.usb?' bzw. auf die USB-Festplatte verschieben.':`; neu laden würde später ca. ${dauer(neuladen(frei2))} dauern.`);
+      } else {
+        const alle=kand.reduce((a,x)=>a+x.gb,0);
+        cls='bad'; say=`Es fehlen ${zahl(fehlt)} GB – das reicht nicht mal ohne deine ★-Spiele.`;
+        more=`Alle nicht markierten Spiele zusammen bringen nur ${zahl(alle)} GB. Du musst ein ★-Spiel löschen oder mehr Speicher einbauen.`;
+        inhalt=basis; text=`${K.kurz}: Für das neue Spiel (${zahl(neu)} GB) fehlen ${zahl(fehlt)} GB, auch ohne meine Lieblingsspiele reicht der Platz nicht.`;
+        tips.push(`Ob sich mehr Speicher lohnt, rechnet der Bereich <a href="#ssd?k=${S.k}">SSD, USB-Platte oder löschen</a> aus.`);
+      }
+    }
+    if(K.sony){ tips.push('PS5-Spiele lassen sich auf einer USB-Festplatte nur lagern, nicht spielen (PlayStation-Support). PS4-Spiele laufen direkt von der USB-Platte – die zuerst auslagern.'); }
+    else { tips.push('Series-X|S-Spiele lassen sich auf USB nur lagern, nicht starten; Xbox-One-Spiele laufen direkt von USB. Direkt spielen geht nur von der Erweiterungskarte.'); }
+    tips.push('Aufnahmen und Videoclips in der Mediengalerie belegen oft 20–50 GB – dort zuerst aufräumen.');
+    if(!freiGegeben) tips.push('Gerechnet ohne Systemdaten und Aufnahmen: Trag für ein genaues Ergebnis den freien Platz aus den Einstellungen ein.');
+    document.getElementById('out').innerHTML=antwortBox(cls,'Dein Speicher',say,more,inhalt,tips,text,
+      `Rechnung: freier Platz minus benötigter Platz. Vorschlag: unter den nicht markierten Spielen die Kombination mit den wenigsten Spielen und dabei den wenigsten gelöschten GB. Neu laden mit ${zahl(e)} Mbit/s an der Konsole plus 15 %, Zurückkopieren von einer USB-Festplatte mit ca. ${USB_HDD} MB/s (USB-SSD ca. ${USB_SSD} MB/s).`);
+    hashSetzen('platz',S); aktuell={seite:'platz',S,titel:'Konsolen-Helfer: Passt das Spiel?'};
+  };
+  verbinden({neu:'neu',frei:'frei',mbit:'mbit'},S,()=>{S.frei=document.getElementById('frei').value;document.querySelectorAll('#neup .pill').forEach(x=>x.classList.toggle('on',x.dataset.v===String(S.neu)));rechne();});
+  pillGroup('kon',v=>{S.k=v;S.erw=0;platz(new URLSearchParams(query(S)));});
+  pillGroup('erw',v=>{S.erw=num(v);rechne();});
+  pillGroup('neup',v=>{S.neu=num(v);document.getElementById('neu').value=S.neu;rechne();});
+  pillGroup('usb',v=>{S.usb=num(v);rechne();});
+  rechne();
+}
+
+// ================= SSD, USB-Platte oder löschen =================
+// Beispielpreise: PS5-M.2 1 TB mit Kühlkörper ab 247 €, 2 TB ab 426 € (Amazon, 17.11.2026, laut drohnen.de);
+// Xbox-Erweiterungskarte 1 TB 222 € (Seagate, 1.11.2026); USB-Festplatte 5 TB 210 € (17.11.2026, laut drohnen.de)
+const SD={k:'ps5',wechsel:2,gb:100,mbit:100,weg:'w5',tg:30,pusb:210,pssd:0};
+function ssd(p){
+  vorbelegen(SD,p); const S=SD; const sony=KONSOLEN[S.k].sony;
+  const ssdStd=sony?247:222; const ssdName=sony?'M.2-SSD 1 TB mit Kühlkörper':'Erweiterungskarte 1 TB';
+  h(`<h2>💸 SSD kaufen, USB-Platte oder einfach löschen?</h2>
+  <div class="step">Deine Konsole</div>
+  ${pills('kon',KON_PILLS,S.k)}
+  <div class="fields">${zahlFeld('wechsel','Wie oft im Monat müsstest du ein großes Spiel löschen und wieder holen?',S.wechsel,30,1)}${zahlFeld('gb','Wie groß sind diese Spiele im Schnitt (GB)?',S.gb,400,1)}</div>
+  <div class="fields">${zahlFeld('mbit','Leitung in Mbit/s',S.mbit,10000,1)}${zahlFeld('tg','Was kannst du im Monat sparen (€)?',S.tg,2000,1)}</div>
+  <div class="step">Verbindung der Konsole</div>
+  ${pills('weg',WEG_PILLS,S.weg)}
+  <div class="fields">${zahlFeld('pssd',`Preis ${ssdName} (€, 0 = Beispielpreis ${ssdStd} €)`,S.pssd,3000,1)}${zahlFeld('pusb','Preis USB-Festplatte (€)',S.pusb,2000,1)}</div>
+  <p class="hint">Aktuelle Preise vergleichen: <a href="https://geizhals.de/?fs=${sony?'PS5+SSD+K%C3%BChlk%C3%B6rper+1TB':'Xbox+Series+Speichererweiterungskarte'}" target="_blank" rel="noopener">Preisvergleich öffnen</a> (öffnet eine fremde Seite).</p>
+  <div id="out"></div>`);
+  const rechne=()=>{
+    const e=effMbit(S.mbit,S.weg), w=clamp(S.wechsel,0,60), gb=clamp(S.gb,1,1000);
+    const hDl=stunden(gb,e)*1.15, hUsb=kopierStd(gb,USB_HDD);
+    const mLoe=w*hDl, mUsb=w*hUsb, pS=S.pssd>0?S.pssd:ssdStd, pU=Math.max(0,S.pusb), tg=Math.max(0,S.tg);
+    const spar=x=>tg>0?Math.ceil(x/tg):Infinity;
+    const jahrGespart=(mLoe)*12;
+    const proStdSsd=jahrGespart>0?pS/jahrGespart:Infinity, proStdUsb=(mLoe-mUsb)*12>0?pU/((mLoe-mUsb)*12):Infinity;
+    let cls,say,more;
+    if(mLoe<=2){ cls='ok'; say='Löschen reicht – kauf erst mal nichts.'; more=`Du wartest im Monat nur etwa <b>${dauer(mLoe)}</b> auf Downloads. Starte sie abends, dann sind sie morgens fertig.`; }
+    else if(w<6){ cls='warn'; say=`USB-Festplatte als Parkplatz – spart ${dauer(mLoe-mUsb)} Warten im Monat.`; more=`Statt ${dauer(mLoe)} Download wartest du nur ${dauer(mUsb)} aufs Zurückkopieren. Die Platte kostet ca. ${eur(pU)}${tg>0?`, also ${spar(pU)} Monate sparen`:''}. ${sony?'Eine SSD':'Eine Erweiterungskarte'} (${eur(pS)}) lohnt sich erst, wenn du mehrere große Spiele gleichzeitig spielen willst.`; }
+    else { cls='ok'; say=`${sony?'Eine SSD':'Eine Erweiterungskarte'} lohnt sich für dich.`; more=`Du wechselst ${w}× im Monat – ohne Erweiterung wären das <b>${dauer(mLoe)}</b> Warten im Monat. Mit ${sony?'SSD':'Karte'} spielst du alles direkt. Kosten ca. ${eur(pS)}${tg>0?`, also ${spar(pS)} Monate sparen`:''}.`; }
+    const rows=[[`Löschen & neu laden · 0 €`,mLoe],[`USB-Festplatte · ${eur(pU)}`,mUsb],[`${sony?'M.2-SSD':'Erweiterungskarte'} · ${eur(pS)}`,0]];
+    const inhalt=`<div class="step">Warten pro Monat:</div>`+balken(rows,dauer)+liste([
+      ['Warten im Jahr ohne Kauf',dauer(mLoe*12)],
+      ['Kosten je gesparter Stunde (SSD/Karte)',isFinite(proStdSsd)?eur2(proStdSsd):'–'],
+      ['Kosten je gesparter Stunde (USB-Platte)',isFinite(proStdUsb)?eur2(proStdUsb):'–'],
+      ...(tg>0?[[`Sparen für ${sony?'SSD':'Karte'} bei ${eur(tg)} im Monat`,spar(pS)+' Monate'],[`Sparen für USB-Platte`,spar(pU)+' Monate']]:[])
+    ]);
+    const tips=[];
+    if(sony) tips.push('Die SSD muss laut Sony eine M.2-NVMe-SSD mit PCIe Gen4 sein (250 GB bis 8 TB), mindestens 5.500 MB/s Lesen werden empfohlen, und sie braucht einen Kühlkörper.');
+    else tips.push('Bei der Xbox laufen Series-Spiele nur von der internen SSD oder der Erweiterungskarte. Eine normale USB-Festplatte ist nur Lager.');
+    tips.push('Eine USB-Festplatte muss mindestens 250 GB groß sein und SuperSpeed-USB (5 Gbit/s) können. Direkt hinten an die Konsole stecken, nicht über einen Hub.');
+    tips.push('Speicher ist 2026 teuer: Preise vor dem Kauf vergleichen – Black Friday und Weihnachten bringen oft Angebote.');
+    const text=`Meine ${KONSOLEN[S.k].kurz}: Ich lade etwa ${w}× im Monat ein Spiel mit ${zahl(gb)} GB neu. Ohne Kauf warte ich ${dauer(mLoe)} im Monat (${dauer(mLoe*12)} im Jahr). Mit USB-Festplatte (ca. ${eur(pU)}) nur ${dauer(mUsb)}, mit ${sony?'SSD':'Erweiterungskarte'} (ca. ${eur(pS)}) gar nicht. Ergebnis: ${ohneTags(say)}`;
+    document.getElementById('out').innerHTML=antwortBox(cls,'Deine Entscheidung',say,more,inhalt,tips,text,
+      `Rechnung: Download ${zahl(gb)} GB bei ${zahl(e)} Mbit/s an der Konsole = ${dauer(stunden(gb,e))} plus 15 % = ${dauer(hDl)} je Wechsel; Zurückkopieren von USB-Festplatte mit ca. ${USB_HDD} MB/s = ${dauer(hUsb)}. Empfehlung: bis 2 Std. Warten im Monat: löschen; mehr Warten, aber weniger als 6 Wechsel im Monat: USB-Festplatte; ab 6 Wechseln: SSD bzw. Karte. Beispielpreise: PS5-SSD 1 TB mit Kühlkörper ab 247 € (17.11.2026), Xbox-Karte 1 TB 222 € (1.11.2026), USB-Festplatte 5 TB 210 € (17.11.2026).`);
+    hashSetzen('ssd',S); aktuell={seite:'ssd',S,titel:'Konsolen-Helfer: SSD oder löschen?'};
+  };
+  verbinden({wechsel:'wechsel',gb:'gb',mbit:'mbit',tg:'tg',pssd:'pssd',pusb:'pusb'},S,rechne);
+  pillGroup('kon',v=>{S.k=v;S.pssd=0;ssd(new URLSearchParams(query(S)));});
+  pillGroup('weg',v=>{S.weg=v;rechne();});
+  rechne();
+}
+
+// ================= Navigation =================
+const SEITEN={download,platz,ssd};
+function route(){ const {seite,p}=hashTeile(); const f=SEITEN[seite];
+  document.getElementById('back').classList.toggle('hide',!f);
+  if(f) f(p); else start(); }
+window.addEventListener('hashchange',route);
+document.getElementById('home').addEventListener('click',()=>{location.hash='';});
+document.getElementById('back').addEventListener('click',()=>{location.hash='';});
+route();
+</script>
+</body>
+</html>
